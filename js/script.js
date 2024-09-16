@@ -134,23 +134,51 @@ for (let i = 0; i < navigationLinks.length; i++) {
   });
 }
 
+
+// Show Toast Function with Type
+function showToast(message, type = 'info') {
+  const toast = document.getElementById('toast');
+  const toastMessage = document.getElementById('toastMessage');
+  const toastIcon = document.querySelector('.toast-icon');
+  
+  // Remove existing type classes
+  toast.className = 'toast';
+  
+  // Set the toast message and type class
+  toastMessage.innerText = message;
+  toast.classList.add(type); // Add the type class (success, error, info, warning)
+  toast.classList.add('show'); // Show the toast
+  
+  // Set the icon based on the type
+  if (type === 'success') {
+    toastIcon.textContent = '✓'; // Checkmark icon
+  } else {
+    toastIcon.textContent = ''; // Clear icon for other types
+  }
+
+  // Hide the toast after 3 seconds
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
+}
+
 // EmailJS integration
-form.addEventListener('submit', function (event) {
+document.querySelector('[data-form]').addEventListener('submit', function (event) {
   event.preventDefault(); // prevent form from submitting traditionally
 
   console.log('Form submitted');
 
-  // send email using Email.js
+  // Send email using Email.js
   emailjs.sendForm('service_0lwqxwl', 'template_pyii56q', this, 'oU9RSgiYdUpRKBTUA')
     .then((result) => {
       console.log('Email sent successfully:', result.text);
-      alert('Message sent successfully!');
-      form.reset(); // reset the form after successful submission
-      formBtn.setAttribute('disabled', ''); // disable the button after form reset
+      showToast('Your message has been sent successfully.', 'success'); // Show success toast
+      document.querySelector('[data-form]').reset(); // Reset the form after successful submission
+      document.querySelector('[data-form-btn]').setAttribute('disabled', ''); // Disable the button after form reset
     })
     .catch((error) => {
       console.error('Failed to send email:', error);
-      alert('Failed to send email. Please try again later.');
+      showToast('Failed to send email. Please try again later.', 'error'); // Show error toast
     });
 
   console.log('Form submission handled');

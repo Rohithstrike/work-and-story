@@ -1956,3 +1956,21 @@ textarea.form-input::-webkit-resizer { display: none; }
   color: #fff;
   font-size: 20px;
 }
+
+
+main {
+  flex-grow: 1; /* Pushes content above the footer */
+}
+
+footer {
+  text-align: center;
+  color: #fff; /* Bright white text */
+  padding: 20px 0;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  width: 100%; /* Full width */
+  background-color: transparent; /* No background */
+  position: relative; /* Keeps it within the document flow */
+  bottom: 0;
+  left: 0;
+}

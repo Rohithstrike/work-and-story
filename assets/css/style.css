@@ -1965,7 +1965,7 @@ footer {
 
 /* Style for download button */
 .download-button {
-  margin-left: auto;
+  margin-left: 50%;
   padding: 5px 15px;
   font-size: var(--fs-6);
   background-color: #343a40; /* Dark Gray - More noticeable */
